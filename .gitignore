@@ -1,0 +1,5 @@
+# Ignore all pdf
+*.pdf
+
+# Ignore .ipynb_checkpoints
+/.ipynb_checkpoints
