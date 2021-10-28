@@ -1,104 +1,50 @@
-#%%
-from modules import blackjack_logo
-import random as rnd
+############DEBUGGING#####################
 
-cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"]
-deck = 4*cards
+# # Describe Problem
+# def my_function():
+# #  for i in range(1, 20): # range function goes from 1 to 20 - 1!
+#   for i in range(1, 21):
+#     if i == 20:
+#       print("You got it")
+#  my_function()
 
-outcome = ["draw", "win", "lose"]
-# remember 0, 1, -1 for draw, win, lose
-#%%
-def draw_cards(nn):
-    """
-    returns LIST, even with only one card
-    """
-    card_drawn = rnd.sample(deck,nn)
-    for k in card_drawn:
-        del deck[deck.index(k)]
-    return card_drawn
-#%%
-def evaluate_cards(in_cards):
-    out_cards = []
-    aces = []
-    for card in in_cards:
-        if card in ["J", "Q", "K"]:
-            out_cards += [10]
-        elif card == "A":
-            aces += ["A"]
-        else:
-            out_cards += [card]
-    if aces is not []:
-        if len(aces) == 1 and sum(out_cards) <= 21:
-            out_cards += [11]
-        if len(aces) == 1 and sum(out_cards) > 21:
-            out_cards += [1]
-    else:
-        pass        
-    return out_cards
-#%%
-def compare_cards(player, dealer):
-    
-    player_total = sum(player)
-    dealer_total = sum(dealer)
+# # Reproduce the Bug
+# from random import randint
+# dice_imgs = ["❶", "❷", "❸", "❹", "❺", "❻"]
+# # dice_num = randint(1, 6) # randint goes from 1 to 6 including 6!
+# # dice_num = 6 # reproduce continuously -> also 0 will never show
+# for _ in range(10):
+#     dice_num = randint(0,5)
+#     print(dice_imgs[dice_num])
 
-    if player_total > 21:
-        return [-1, "end"]
-    elif dealer_total > 21:
-        return [1, "end"]
-    elif player_total < 17:
-        return [1, "another"]
-    elif player_total <= 21:
-        return [1, "choice"]
-    else:
-        return "Why did nothing happen?"
-#%%
-def blackjack():
-    
-    # shuffle cards
-    if len(deck)<10:
-        deck = 4*cards
-    else:
-        pass
+# # Play Computer
+# year = int(input("What's your year of birth?"))
+# if year > 1980 and year < 1994:
+#   print("You are a millenial.")
+# # elif year > 1994: # case 1994 == is not caught
+# elif year >= 1994:
+#   print("You are a Gen Z.")
 
-    print(blackjack_logo)
-    
-    # deal first cards
-    # rule is: player invisible, dealer invisible, player invisible, dealer visible
-    dealer_cards = draw_cards(1)
-    player_cards = draw_cards(1)
-    second_dealer = draw_cards(1)
-    print(f"dealer has {second_dealer}.")
-    dealer_cards += second_dealer
-    player_cards += draw_cards(1)
-    print(f"you have {player_cards}")
-    
-    # initialize result
-    result = [1,""]
+# # Fix the Errors
+# # age = input("How old are you?") # input returns a string!
+# age = int(input("How old are you?"))
+# if age > 18:
+#     print(f"You can drive at age {age}.")
 
-    while result[0] == 1 and result[1] != "end":
-        # assign card values
-        dealer_values = evaluate_cards(dealer_cards)
-        player_values = evaluate_cards(player_cards)
-        
-        # evaluate result
-        result = compare_cards(player_values, dealer_values)
+# #Print is Your Friend
+# pages = 0
+# word_per_page = 0
+# pages = int(input("Number of pages: "))
+# word_per_page == int(input("Number of words per page: "))
+# total_words = pages * word_per_page
+# print(total_words)
 
-        if result[1] == "another":
-            print("You have to draw another.")
-            newcard = draw_cards(1)
-            print("Your next card is: {newcard}")
-            player_cards += newcard
+# #Use a Debugger
+# def mutate(a_list):
+#   b_list = []
+#   for item in a_list:
+#     new_item = item * 2
+#   b_list.append(new_item)
+#   print(b_list)
 
-        elif result[1] == "choice":
-            if "y" == input("Do you want to draw another? y/n : "):
-                newcard = draw_cards(1)
-                print("Your next card is: {newcard}")
-                player_cards += newcard
-
-        another = bool("y" == input("Want to play another game?"))
-        if another:
-            blackjack()
-        else:
-            raise Exception("STOP THE COUNT!!!")
-
-blackjack()
+# mutate([1,2,3,5,8,13])
